@@ -107,8 +107,7 @@
 - (id)outlineView:(id)outlineView viewForTableColumn:(id)tableColumn item:(id)item
 {
     var view = [outlineView makeViewWithIdentifier:@"propertyCell" owner:self],
-        prefix = [item subjectKey],
-        text = prefix + ": " + [item subjectDescription];
+        text = [item subjectKeyPrefix] + [item subjectDescription];
     [[view textField] setStringValue:text];
     [[view imageView] setImage:(CPImageInBundle(@"cup.png", 16, 16, [InspectKit bundle]))];
     return view;

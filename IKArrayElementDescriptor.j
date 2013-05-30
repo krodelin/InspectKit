@@ -53,4 +53,9 @@
 {
     return _index;
 }
+
+- (CPString)keyPrefix
+{
+    return _index + @": ";
+}
 @end

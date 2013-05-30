@@ -61,9 +61,9 @@
     return [_descriptor keyPath];
 }
 
-- (CPString)subjectKey
+- (CPString)subjectKeyPrefix
 {
-    return [_descriptor key];
+    return [_descriptor keyPrefix];
 }
 
 - (id)subjectValue

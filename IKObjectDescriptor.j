@@ -46,9 +46,12 @@
     return self;
 }
 
-- (CPString)key
+- (CPString)keyPrefix
 {
-    return _keyPath;
+    if(!(_keyPath == @"self"))
+        return _keyPath + @": ";
+    else
+        return @"";
 }
 
 - (id)valueForSubject:(id)subject
@@ -60,6 +63,8 @@
 {
     var subjectValue = [self valueForSubject:subject],
         aspects = [subjectValue ikDescriptions];
+    if(!aspects)
+        return [];
 
     return aspects.map(function (eachDescriptor){
         return [[IKAccessor alloc] initWithSubject:subjectValue descriptor:eachDescriptor];
