@@ -70,7 +70,7 @@
 
 - (CPImage)ikImage
 {
-    return CPImageInBundle(@"cup.png", 16, 16, [InspectKit bundle]);
+    return CPImageInBundle(@"CPObject.png", 16, 16, [InspectKit bundle]);
 }
 
 @end
