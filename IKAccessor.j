@@ -83,7 +83,7 @@
 
 - (CPImage)subjectImage
 {
-    return [[self subjectValue] ikImage];
+    return [_descriptor imageForSubject:_subject];
 }
 
 @end

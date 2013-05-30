@@ -68,11 +68,6 @@
     return [self description];
 }
 
-- (CPImage)ikImage
-{
-    return CPImageInBundle(@"CPObject.png", 16, 16, [InspectKit bundle]);
-}
-
 @end
 
 
