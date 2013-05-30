@@ -34,6 +34,7 @@
 @import "IKObjectDescriptor.j"
 @import "IKArrayDescriptor.j"
 @import "IKArrayElementDescriptor.j"
+@import "IKColorDescriptor.j"
 
 @import "IKAccessor.j"
 

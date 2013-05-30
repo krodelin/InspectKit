@@ -1,5 +1,5 @@
 /*
- * CPView+InspectKit.j
+ * IKColorDescriptor.j
  * InspectKit
  *
  * Created by Udo Schneider on May 25, 2013.
@@ -27,25 +27,8 @@
  * THE SOFTWARE.
  *
  */
-@import <Foundation/Foundation.j>
-@import <AppKit/AppKit.j>
 @import "IKObjectDescriptor.j"
-@import "IKArrayDescriptor.j"
-@import "IKColorDescriptor.j"
 
-@implementation CPView (InspectKit)
-
-+ (CPArray)ikDescriptionsOfInstances
-{
-    return [[super ikDescriptionsOfInstances] arrayByAddingObjectsFromArray: [
-        [[IKObjectDescriptor alloc] initWithKeyPath:@"window"],
-        [[IKObjectDescriptor alloc] initWithKeyPath:@"superview"],
-        [[IKArrayDescriptor alloc] initWithKeyPath:@"subviews"],
-        [[IKObjectDescriptor alloc] initWithKeyPath:@"backgroundColor"],
-    ]];
-}
+@implementation IKColorDescriptor : IKObjectDescriptor
 
 @end
-
-
-
