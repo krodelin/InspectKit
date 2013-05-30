@@ -30,3 +30,17 @@
 */
 
 @import "InspectKitClass.j"
+
+@import "IKObjectDescriptor.j"
+@import "IKArrayDescriptor.j"
+@import "IKArrayElementDescriptor.j"
+
+@import "IKAccessor.j"
+
+@import "CPObject+InspectKit.j"
+@import "CPString+InspectKit.j"
+@import "CPArray+InspectKit.j"
+@import "CPView+InspectKit.j"
+
+@import "IKWindowController.j"
+@import "IKPropertiesViewController.j"

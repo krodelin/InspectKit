@@ -36,9 +36,14 @@
 */
 @implementation InspectKit : CPObject
 
++ (CPBundle)bundle
+{
+	return [CPBundle bundleForClass:[self class]];
+}
+
 + (CPString)version
 {
-    var bundle = [CPBundle bundleForClass:[self class]];
+    var bundle = [self bundle];
 
     return [bundle objectForInfoDictionaryKey:@"CPBundleVersion"];
 }
