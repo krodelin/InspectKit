@@ -109,7 +109,7 @@
     var view = [outlineView makeViewWithIdentifier:@"propertyCell" owner:self],
         text = [item subjectKeyPrefix] + [item subjectDescription];
     [[view textField] setStringValue:text];
-    [[view imageView] setImage:(CPImageInBundle(@"cup.png", 16, 16, [InspectKit bundle]))];
+    [[view imageView] setImage:[item subjectImage]];
     return view;
 }
 

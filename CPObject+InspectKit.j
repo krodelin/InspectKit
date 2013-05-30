@@ -68,6 +68,11 @@
     return [self description];
 }
 
+- (CPImage)ikImage
+{
+    return CPImageInBundle(@"cup.png", 16, 16, [InspectKit bundle]);
+}
+
 @end
 
 

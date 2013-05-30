@@ -81,4 +81,9 @@
     return [_descriptor childrenForSubject:_subject];
 }
 
+- (CPImage)subjectImage
+{
+    return [[self subjectValue] ikImage];
+}
+
 @end
