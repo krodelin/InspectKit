@@ -37,6 +37,11 @@
     return @"\@\"" + self + @"\"";
 }
 
++ (CPImage)ikImage
+{
+    return CPImageInBundle(@"CPString.png", 16, 16, [InspectKit bundle]);
+}
+
 @end
 
 
