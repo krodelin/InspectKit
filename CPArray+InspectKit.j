@@ -36,6 +36,11 @@
     return "<" + [self className] + " 0x" + [CPString stringWithHash:[self UID]] + ">";
 }
 
++ (CPImage)ikImage
+{
+    return CPImageInBundle(@"CPColor.png", 16, 16, [InspectKit bundle]);
+}
+
 @end
 
 
