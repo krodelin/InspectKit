@@ -59,8 +59,9 @@
     return [subject valueForKeyPath:_keyPath];
 }
 
-- (CPImage)imageForSubject:(id)subject{
-    return [subject ikImage];
+- (CPImage)imageForSubject:(id)subject
+{
+    return [[self valueForSubject:subject] ikImage];
 }
 
 - (CPArray)childrenForSubject:(id)subject
