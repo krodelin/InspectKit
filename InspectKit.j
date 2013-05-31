@@ -42,6 +42,7 @@
 @import "CPString+InspectKit.j"
 @import "CPArray+InspectKit.j"
 @import "CPView+InspectKit.j"
+@import "CPColor+InspectKit.j"
 
 @import "IKWindowController.j"
 @import "IKPropertiesViewController.j"

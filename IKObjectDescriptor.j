@@ -60,7 +60,7 @@
 }
 
 - (CPImage)imageForSubject:(id)subject{
-    return CPImageInBundle(@"CPObject.png", 16, 16, [InspectKit bundle]);
+    return [subject ikImage];
 }
 
 - (CPArray)childrenForSubject:(id)subject

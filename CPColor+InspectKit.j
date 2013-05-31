@@ -1,5 +1,5 @@
 /*
- * IKColorDescriptor.j
+ * CPColorInspectKit.j
  * InspectKit
  *
  * Created by Udo Schneider on May 25, 2013.
@@ -27,8 +27,17 @@
  * THE SOFTWARE.
  *
  */
-@import "IKObjectDescriptor.j"
+@import <Foundation/Foundation.j>
+@import <AppKit/AppKit.j>
+@import "InspectKitClass.j"
 
-@implementation IKColorDescriptor : IKObjectDescriptor
+@implementation CPColor (InspectKit)
+
+- (CPImage)ikImage
+{
+    return CPImageInBundle(@"CPColor.png", 16, 16, [InspectKit bundle]);
+}
 
 @end
+
+
