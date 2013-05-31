@@ -31,4 +31,8 @@
 
 @implementation IKColorDescriptor : IKObjectDescriptor
 
+- (CPImage)imageForSubject:(id)subject{
+    return CPImageInBundle(@"CPColor.png", 16, 16, [InspectKit bundle]);
+}
+
 @end
