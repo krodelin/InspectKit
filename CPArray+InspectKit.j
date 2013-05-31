@@ -38,7 +38,7 @@
 
 + (CPImage)ikImage
 {
-    return CPImageInBundle(@"CPColor.png", 16, 16, [InspectKit bundle]);
+    return CPImageInBundle(@"CPArray.png", 16, 16, [InspectKit bundle]);
 }
 
 @end
