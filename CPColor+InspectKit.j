@@ -1,5 +1,5 @@
 /*
- * CPColorInspectKit.j
+ * CPColor+InspectKit.j
  * InspectKit
  *
  * Created by Udo Schneider on May 25, 2013.
