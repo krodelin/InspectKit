@@ -36,6 +36,7 @@
 {
     IKAspectAccessor _accessor;
     @outlet CPOutlineView _outlineView;
+    @outlet CPTextfFeldView _valueKeyPathView;
 }
 
 - (void)setAccessor:(IKAspectAccessor)accessor
@@ -83,35 +84,27 @@
 {
     // CPLog.trace(@"%@ - (id)outlineView:(CPOutlineView)%@ objectValueForTableColumn:(CPTableColumn)%@ byItem:(id)%@", self, outlineView, tableColumn, item);
 
-    var value = [item valueDisplayString];
-    if ([item valueIsRoot])
-    {
-        return [CPString stringWithFormat:"%@", value];
-    }
-    else
-    {
-        var key = [item valueKey];
-        return [CPString stringWithFormat:"%@ = %@", key, value];
-    }
+    var value = [item valueDisplayString],
+        key = [item valueKey];
+    return [CPString stringWithFormat:"%@: %@", key, value];
 }
 
 - (id)outlineView:(id)outlineView viewForTableColumn:(id)tableColumn item:(id)item
 {
     var tableCellView = [outlineView makeViewWithIdentifier:@"propertyCell" owner:self],
         value = [item valueDisplayString],
-        text;
-    if ([item valueIsRoot])
-    {
-        text = [CPString stringWithFormat:"%@", value];
-    }
-    else
-    {
-        var key = [item valueKey];
-        text = [CPString stringWithFormat:"%@ = %@", key, value];
-    }
+        key = [item shortValueKey],
+        text = [CPString stringWithFormat:"%@: %@", key, value];
     [[tableCellView textField] setStringValue:text];
     [[tableCellView imageView] setImage:[item valueImage]];
     return tableCellView;
+}
+
+- (void)outlineViewSelectionDidChange:(CPNotification)notification
+{
+    var selectedItem = [_outlineView itemAtRow:[_outlineView selectedRow]],
+        keyPath = [selectedItem valueKeyPath];
+    [_valueKeyPathView setStringValue:keyPath];
 }
 
 @end

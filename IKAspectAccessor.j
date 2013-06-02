@@ -34,16 +34,23 @@
 {
     id _subject @accessors(property=subject, readonly);
     IKAspect _aspect @accessors(property=aspect, readonly);
+    IKAspectAccessor _parent @accessors(property=subject, readonly);
 }
 
-- (IKAspectAccessor)initWithSubject:(id)subject aspect:(IKAspect)aspect
+- (IKAspectAccessor)initWithSubject:(id)subject aspect:(IKAspect)aspect parent:(IKAspectAccessor)parent
 {
     if (self = [super init])
     {
         _subject = subject;
         _aspect = aspect
+        _parent = parent;
     }
     return self;
+}
+
+- (IKAspectAccessor)initWithSubject:(id)subject aspect:(IKAspect)aspect
+{
+    return [self initWithSubject:subject aspect:aspect parent:nil];
 }
 
 - (IKAspectAccessor)initWithSubject:(id)subject
@@ -57,15 +64,20 @@
         aspects = [value ikPublishedAspects],
         children = [[CPMutableArray alloc] init];
     [aspects enumerateObjectsUsingBlock:(function (eachAspect){
-        var accessor = [[IKAspectAccessor alloc] initWithSubject:value aspect:eachAspect];
+        var accessor = [[IKAspectAccessor alloc] initWithSubject:value aspect:eachAspect parent:self];
         [children addObject: accessor];
     })];
     return children;
 }
 
-- (CPString)valueKey
+- (CPString)shortValueKey
 {
-    return [_aspect key];
+    return [_aspect shortDisplayKey];
+}
+
+- (CPString)longValueKey
+{
+    return [_aspect longDisplayKey];
 }
 
 - (id)value
@@ -83,9 +95,17 @@
     return [_aspect smallImageFor:_subject];
 }
 
-- (BOOL)valueIsRoot
+- (BOOL)valueIsSelfAspect
 {
-    return [_aspect isRoot];
+    return [_aspect isSelfAspect];
+}
+
+- (CPString)valueKeyPath
+{
+    if (!_parent)
+        return @"objectValue";
+
+    return [_parent valueKeyPath] + [self longValueKey];
 }
 
 @end

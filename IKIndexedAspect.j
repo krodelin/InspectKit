@@ -56,4 +56,14 @@
     debugger;
 }
 
+- (CPString)shortDisplayKey
+{
+    return _index;
+}
+
+- (CPString)longDisplayKey
+{
+    return "[" + _index + "]";
+}
+
 @end

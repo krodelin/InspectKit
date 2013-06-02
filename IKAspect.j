@@ -62,9 +62,24 @@
     return self;
 }
 
+- (BOOL)isSelfAspect
+{
+    return [_key isEqualToString:@"self"];
+}
+
 - (CPImage)smallImageFor:(id)object
 {
 	return [[self readFrom:object] ikSmallImage];
+}
+
+- (CPString)shortDisplayKey
+{
+    return _key;
+}
+
+- (CPString)longDisplayKey
+{
+    return "." + [self shortDisplayKey];
 }
 
 @end

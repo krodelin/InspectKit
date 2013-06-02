@@ -43,11 +43,6 @@
 	[object setValue:value forKey:_key];
 }
 
-- (BOOL)isRoot
-{
-	return [_key isEqualToString:@"self"];
-}
-
 - (CPImage)smallImageFor:(id)object
 {
 	return [[self readFrom:object] ikSmallImage];
