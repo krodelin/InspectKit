@@ -1,5 +1,5 @@
 /*
- * IKAccessor.j
+ * IKAspect.j
  * InspectKit
  *
  * Created by Udo Schneider on May 25, 2013.
@@ -27,63 +27,44 @@
  * THE SOFTWARE.
  *
  */
+@import <Foundation/CPObject.j>
+@import <Foundation/CPString.j>
 
-@import "IKObjectDescriptor.j"
+@class IKObjectAspect
+@class IKIndexedAspect
 
-@implementation IKAccessor : CPObject
+@implementation IKAspect : CPObject
 {
-    id _subject     @accessors(readonly, property=object);
-    IKDescriptor _descriptor   @accessors(readonly, property=descriptor);
+    CPString    _key    @accessors(readonly, property=key)
 }
 
-- (id)initWithSubject:(id)subject descriptor:(IKDescriptor)descriptor
++ (IKObjectAspect)object:(CPString)key
+{
+	return [[IKObjectAspect alloc] initWithKey:key];
+}
+
++ (IKObjectAspect)root
+{
+	return [self object:@"self"];
+}
+
++ (IKObjectAspect)object:(CPString)key index:(int)index
+{
+	return [[IKIndexedAspect alloc] initWithKey:key index:index];
+}
+
+- (id)initWithKey:(CPString)key
 {
     if (self = [super init])
     {
-        _subject = subject;
-        _descriptor = descriptor;
+        _key = key;
     }
     return self;
 }
 
-- (id)initWithSubject:(id)subject
+- (CPImage)smallImageFor:(id)object
 {
-    return [self initWithSubject:subject descriptor:[[IKObjectDescriptor alloc] initWithKeyPath:@"self"]];
-}
-
-- (CPString)description
-{
-    return "<" + [self className] + " 0x" + [CPString stringWithHash:[self UID]] + " (" +  [_subject description] + " / " + [_descriptor description] + ")>";
-}
-
-- (CPString)subjectKeyPath
-{
-    return [_descriptor keyPath];
-}
-
-- (CPString)subjectKeyPrefix
-{
-    return [_descriptor keyPrefix];
-}
-
-- (id)subjectValue
-{
-    return [_descriptor valueForSubject:_subject];
-}
-
-- (CPString)subjectDescription
-{
-    return [[self subjectValue] ikDescription];
-}
-
-- (CPArray)subjectChildren
-{
-    return [_descriptor childrenForSubject:_subject];
-}
-
-- (CPImage)subjectImage
-{
-    return [_descriptor imageForSubject:_subject];
+	return [[self readFrom:object] ikSmallImage];
 }
 
 @end

@@ -31,13 +31,13 @@
 
 @implementation CPString (InspectKit)
 
-- (CPArray)ikDescription
+- (CPArray)ikDisplayString
 {
     // TODO: Print with escaped characters
     return @"\@\"" + self + @"\"";
 }
 
-+ (CPImage)ikImage
++ (CPImage)ikSmallImage
 {
     return CPImageInBundle(@"CPString.png", 16, 16, [InspectKit bundle]);
 }

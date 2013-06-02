@@ -1,5 +1,5 @@
 /*
- * IKObjectDescriptor.j
+ * IKIndexedAspect.j
  * InspectKit
  *
  * Created by Udo Schneider on May 25, 2013.
@@ -29,52 +29,31 @@
  */
 @import <Foundation/CPObject.j>
 @import <Foundation/CPString.j>
+@import "IKObjectAspect.j"
 
-@class IKAccessor
-
-@implementation IKObjectDescriptor : CPObject
+@implementation IKIndexedAspect : IKObjectAspect
 {
-    CPString    _keyPath    @accessors(readonly, property=keyPath)
+    int _index @accessors(property=index, readonly);
 }
 
-- (id)initWithKeyPath:(CPString)keyPath
+- (IKIndexedAspect)initWithKey:key index:(int)index
 {
-    if (self = [super init])
+    if (self = [super initWithKey:key])
     {
-        _keyPath = keyPath;
+        _index = index;
     }
     return self;
 }
 
-- (CPString)keyPrefix
+- (id)readFrom:(id)object
 {
-    if(!(_keyPath == @"self"))
-        return _keyPath + @": ";
-    else
-        return @"";
+    var value = [super readFrom:object] ;
+    return [value objectAtIndex:_index];
 }
 
-- (id)valueForSubject:(id)subject
+- (void)write:(id)value into:(id)object
 {
-    return [subject valueForKeyPath:_keyPath];
-}
-
-- (CPImage)imageForSubject:(id)subject
-{
-    return [[self valueForSubject:subject] ikImage];
-}
-
-- (CPArray)childrenForSubject:(id)subject
-{
-    var subjectValue = [self valueForSubject:subject],
-        aspects = [subjectValue ikDescriptions];
-    if(!aspects)
-        return [];
-
-    return aspects.map(function (eachDescriptor){
-        return [[IKAccessor alloc] initWithSubject:subjectValue descriptor:eachDescriptor];
-    });
-
+    debugger;
 }
 
 @end

@@ -33,7 +33,7 @@
 
 @implementation CPColor (InspectKit)
 
-+ (CPImage)ikImage
++ (CPImage)ikSmallImage
 {
     return CPImageInBundle(@"CPColor.png", 16, 16, [InspectKit bundle]);
 }

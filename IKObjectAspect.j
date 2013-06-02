@@ -1,5 +1,5 @@
 /*
- * IKArrayElementDescriptor.j
+ * IKObjectAspect.j
  * InspectKit
  *
  * Created by Udo Schneider on May 25, 2013.
@@ -27,36 +27,30 @@
  * THE SOFTWARE.
  *
  */
-@import "IKObjectDescriptor.j"
+@import <Foundation/CPObject.j>
+@import <Foundation/CPString.j>
+@import "IKAspect.j"
 
-@implementation IKArrayElementDescriptor : IKObjectDescriptor
+@implementation IKObjectAspect : IKAspect
+
+- (id)readFrom:(id)object
 {
-    int _index;
+    return [object valueForKey:_key];
 }
 
-- (id)initWithKeyPath:(CPString)keyPath index:(int)index
+- (void)write:(id)value into:(id)object
 {
-    if (self = [super initWithKeyPath:keyPath])
-    {
-        _index = index;
-    }
-    return self;
+	[object setValue:value forKey:_key];
 }
 
-- (id)valueForSubject:(id)subject
+- (BOOL)isRoot
 {
-
-    return [[super valueForSubject:subject] objectAtIndex:_index];
+	return [_key isEqualToString:@"self"];
 }
 
-- (CPString)key
+- (CPImage)smallImageFor:(id)object
 {
-    return _index;
-}
-
-- (CPString)keyPrefix
-{
-    return _index + @": ";
+	return [[self readFrom:object] ikSmallImage];
 }
 
 @end

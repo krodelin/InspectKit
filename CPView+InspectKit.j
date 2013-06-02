@@ -29,19 +29,16 @@
  */
 @import <Foundation/Foundation.j>
 @import <AppKit/AppKit.j>
-@import "IKObjectDescriptor.j"
-@import "IKArrayDescriptor.j"
-@import "IKColorDescriptor.j"
+@import "IKAspect.j"
 
 @implementation CPView (InspectKit)
 
-+ (CPArray)ikDescriptionsOfInstances
++ (CPArray)ikPublishedAspectsOfInstances
 {
-    return [[super ikDescriptionsOfInstances] arrayByAddingObjectsFromArray: [
-        [[IKObjectDescriptor alloc] initWithKeyPath:@"window"],
-        [[IKObjectDescriptor alloc] initWithKeyPath:@"superview"],
-        [[IKArrayDescriptor alloc] initWithKeyPath:@"subviews"],
-        [[IKObjectDescriptor alloc] initWithKeyPath:@"backgroundColor"],
+    return [[super ikPublishedAspectsOfInstances] arrayByAddingObjectsFromArray: @[
+        [IKAspect object:@"superview"],
+        [IKAspect object:@"subviews"],
+        [IKAspect object:@"backgroundColor"],
     ]];
 }
 

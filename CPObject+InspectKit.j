@@ -36,47 +36,44 @@
 
 - (void)inspect
 {
-    var windowController = [[IKWindowController alloc] initWithObject:self];
+    var windowController = [[IKWindowController alloc] initWithSubject:self];
     [windowController showWindow:self];
 }
 
-+ (CPArray)instanceVariableNames
++ (CPArray)ikPublishedAspectsOfInstances
 {
-    return self.ivar_list.map(function (ivar){return ivar.name});
+    return @[ ];
 }
 
-- (CPArray)instanceVariableNames
-{
-    // CPLog(@"%@ - (CPArray)instanceVariableNames = %@", self, [[self class] instanceVariableNames]);
-    return [[self class] instanceVariableNames];
-}
-
-+ (CPArray)ikDescriptionsOfInstances
-{
-    return [
-        // [[IKDescriptor alloc] initWithKeyPath:@"description"]
-    ];
-}
-
-- (CPArray)ikDescriptions
+- (CPArray)ikPublishedAspects
 {
     var c = [self class];
-    return [c ikDescriptionsOfInstances];
+    return [c ikPublishedAspectsOfInstances];
 }
 
-- (CPString)ikDescription
+- (CPString)ikDisplayString
 {
-    return [self description];
+    return "<" + [self className] + ">";
 }
 
-- (CPString)ikImage
+- (CPString)ikSmallImage
 {
-    return [[self class] ikImage];
+    return [[self class] ikSmallImage];
 }
 
-+ (CPImage)ikImage
++ (CPImage)ikSmallImage
 {
     return CPImageInBundle(@"CPObject.png", 16, 16, [InspectKit bundle]);
+}
+
++ (Class)ikDefaultAspectClass
+{
+	return IKObjectAspect;
+}
+
+- (Class)ikDefaultAspectClass
+{
+	return [[self class] ikDefaultAspectClass];
 }
 
 @end

@@ -29,14 +29,14 @@
     source filenames are.
 */
 
+#define INSPECTKIT
+
 @import "InspectKitClass.j"
 
-@import "IKObjectDescriptor.j"
-@import "IKArrayDescriptor.j"
-@import "IKArrayElementDescriptor.j"
-@import "IKColorDescriptor.j"
-
-@import "IKAccessor.j"
+@import "IKAspect.j"
+@import "IKObjectAspect.j"
+@import "IKIndexedAspect.j"
+@import "IKAspectAccessor.j"
 
 @import "CPObject+InspectKit.j"
 @import "CPString+InspectKit.j"
@@ -45,4 +45,5 @@
 @import "CPColor+InspectKit.j"
 
 @import "IKWindowController.j"
-@import "IKPropertiesViewController.j"
+@import "IKAspectsController.j"
+

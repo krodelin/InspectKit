@@ -28,17 +28,24 @@
  *
  */
 @import <Foundation/Foundation.j>
+@import "IKIndexedAspect.j"
 
 @implementation CPArray (InspectKit)
 
-- (CPArray)ikDescription
-{
-    return "<" + [self className] + " 0x" + [CPString stringWithHash:[self UID]] + ">";
-}
-
-+ (CPImage)ikImage
++ (CPImage)ikSmallImage
 {
     return CPImageInBundle(@"CPArray.png", 16, 16, [InspectKit bundle]);
+}
+
+- (CPArray)ikPublishedAspects
+{
+    var children = [[CPMutableArray alloc] init];
+    for(var index = 0; index < [self count]; index++)
+    {
+        var aspect = [IKAspect object:@"self" index:index];
+        [children addObject:aspect];
+    }
+    return children;
 }
 
 @end

@@ -30,27 +30,25 @@
 
 @import <AppKit/AppKit.j>
 @import "InspectKitClass.j"
-@import "IKAccessor.j"
-@import "IKPropertiesViewController.j"
+@import "IKAspectAccessor.j"
+@import "IKAspectsController.j"
 
 @implementation IKWindowController : CPWindowController
 {
-    IKAccessor _accessor @accessors(property=accessor, readonly);
+    IKAspectAccessor _accessor @accessors(property=accessor, readonly);
 
     @outlet CPView propertiesView;
-    IKPropertiesViewController propertiesController;
+    IKAspectsController propertiesController;
 
     @outlet CPView detailsView;
 }
 
-- (id)initWithObject:(id)object
+- (id)initWithSubject:(id)subject
 {
-    // CPLog.trace(@"%@ - (id)initWithObject:(id)%@", self, object);
     var path = [[InspectKit bundle] pathForResource:@"InspectorWindow.cib"];
     if (self = [super initWithWindowCibPath:path owner:self])
     {
-        _accessor = [[IKAccessor alloc] initWithSubject:object];
-        // CPLog.trace(@"propertiesController: %@", propertiesController);
+        _accessor = [[IKAspectAccessor alloc] initWithSubject:subject];
         [propertiesController setAccessor: _accessor];
     }
     return self;
@@ -58,8 +56,7 @@
 
 - (void)awakeFromCib
 {
-    // CPLog.trace(@"%@ - (void)awakeFromCib", self);
-    propertiesController = [[IKPropertiesViewController alloc] initWithCibName:@"PropertiesView" bundle:[InspectKit bundle]];
+    propertiesController = [[IKAspectsController alloc] initWithCibName:@"AspectsView" bundle:[InspectKit bundle]];
     [propertiesController setAccessor: _accessor];
     [[propertiesController view] setFrame:[propertiesView bounds]];
     [propertiesView addSubview:[propertiesController view]];

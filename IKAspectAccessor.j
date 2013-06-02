@@ -1,5 +1,5 @@
 /*
- * IKColorDescriptor.j
+ * IKAspectAccessor.j
  * InspectKit
  *
  * Created by Udo Schneider on May 25, 2013.
@@ -27,8 +27,65 @@
  * THE SOFTWARE.
  *
  */
-@import "IKObjectDescriptor.j"
 
-@implementation IKColorDescriptor : IKObjectDescriptor
+@import "IKAspect.j"
+
+@implementation IKAspectAccessor : CPObject
+{
+    id _subject @accessors(property=subject, readonly);
+    IKAspect _aspect @accessors(property=aspect, readonly);
+}
+
+- (IKAspectAccessor)initWithSubject:(id)subject aspect:(IKAspect)aspect
+{
+    if (self = [super init])
+    {
+        _subject = subject;
+        _aspect = aspect
+    }
+    return self;
+}
+
+- (IKAspectAccessor)initWithSubject:(id)subject
+{
+    return [self initWithSubject:subject aspect:[IKAspect root]];
+}
+
+- (CPArray)subAccessors
+{
+    var value = [self value],
+        aspects = [value ikPublishedAspects],
+        children = [[CPMutableArray alloc] init];
+    [aspects enumerateObjectsUsingBlock:(function (eachAspect){
+        var accessor = [[IKAspectAccessor alloc] initWithSubject:value aspect:eachAspect];
+        [children addObject: accessor];
+    })];
+    return children;
+}
+
+- (CPString)valueKey
+{
+    return [_aspect key];
+}
+
+- (id)value
+{
+    return [_aspect readFrom:_subject];
+}
+
+- (CPString)valueDisplayString
+{
+    return [[self value] ikDisplayString];
+}
+
+- (CPImage)valueImage
+{
+    return [_aspect smallImageFor:_subject];
+}
+
+- (BOOL)valueIsRoot
+{
+    return [_aspect isRoot];
+}
 
 @end
