@@ -141,7 +141,7 @@ filedir (frameworkCJS, [productName], function()
 
 task ("build", [productName, frameworkCJS]);
 
-task ("all", ["debug", "release"]);
+task ("all", ["debug", "release", "documentation"]);
 
 task ("install", ["debug", "release"], function()
 {
@@ -171,6 +171,48 @@ task ("help", function()
 
     colorPrint("--------------------------------------------------------------------------", "bold+green");
 });
+
+task ("documentation", function()
+{
+    // try to find a doxygen executable in the PATH;
+    var doxygen = executableExists("doxygen");
+
+    // If the Doxygen application is installed on Mac OS X, use that
+    if (!doxygen && executableExists("mdfind"))
+    {
+        var p = OS.popen(["mdfind", "kMDItemContentType == 'com.apple.application-bundle' && kMDItemCFBundleIdentifier == 'org.doxygen'"]);
+        if (p.wait() === 0)
+        {
+            var doxygenApps = p.stdout.read().split("\n");
+            if (doxygenApps[0])
+                doxygen = FILE.join(doxygenApps[0], "Contents/Resources/doxygen");
+        }
+    }
+
+    if (doxygen && FILE.exists(doxygen))
+    {
+        stream.print("\0green(Using " + doxygen + " for doxygen binary.\0)");
+
+        var documentationDir = FILE.join("Doxygen");
+
+        if (OS.system([FILE.join(documentationDir, "make_headers.sh")]))
+            OS.exit(1); //rake abort if ($? != 0)
+
+        if (!OS.system([doxygen, FILE.join(documentationDir, "StropheCappuccino.doxygen")]))
+        {
+            rm_rf($DOCUMENTATION_BUILD);
+            // mv("debug.txt", FILE.join("Documentation", "debug.txt"));
+            mv("Documentation", $DOCUMENTATION_BUILD);
+        }
+
+        OS.system(["ruby", FILE.join(documentationDir, "cleanup_headers")]);
+    }
+    else
+        stream.print("\0yellow(Doxygen not installed, skipping documentation generation.\0)");
+});
+
+task ("docs", ["documentation"]);
+
 
 CLEAN.include(buildPath);
 CLOBBER.include(FILE.join(buildDir, "Debug", productName))
