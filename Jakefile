@@ -87,6 +87,8 @@ var stream = require("narwhal/term").stream,
     debugPackagePath = FILE.join(packageFrameworksPath, "Debug", productName);
     releasePackagePath = FILE.join(packageFrameworksPath, productName);
 
+$DOCUMENTATION_BUILD = FILE.join("Build", "Documentation");
+
 var frameworkTask = framework (productName, function(frameworkTask)
 {
     frameworkTask.setBuildIntermediatesPath(FILE.join(buildPath, configuration));
@@ -200,10 +202,13 @@ task ("documentation", function()
         if (OS.system([FILE.join(documentationDir, "make_headers.sh")]))
             OS.exit(1); //rake abort if ($? != 0)
 
-        if (!OS.system([doxygen, FILE.join(documentationDir, "StropheCappuccino.doxygen")]))
+        if (!OS.system([doxygen, FILE.join(documentationDir, "InspectKit.doxygen")]))
         {
             rm_rf($DOCUMENTATION_BUILD);
             // mv("debug.txt", FILE.join("Documentation", "debug.txt"));
+
+            sudo(["mkdir", "-p", $DOCUMENTATION_BUILD]);
+
             mv("Documentation", $DOCUMENTATION_BUILD);
         }
 
