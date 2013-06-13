@@ -212,7 +212,8 @@ task ("documentation", function()
             mv("Documentation", $DOCUMENTATION_BUILD);
         }
 
-        OS.system(["ruby", FILE.join(documentationDir, "cleanup_headers")]);
+        // OS.system(["ruby", FILE.join(documentationDir, "cleanup_headers")]);
+        OS.system([FILE.join(documentationDir, "cleanup_headers")]);
     }
     else
         stream.print("\0yellow(Doxygen not installed, skipping documentation generation.\0)");
