@@ -46,4 +46,6 @@
 
 @import "IKWindowController.j"
 @import "IKAspectsController.j"
+@import "IKAspectHierarchyController.j"
+@import "IKAspectDetailsController.j"
 

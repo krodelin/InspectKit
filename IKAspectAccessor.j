@@ -29,6 +29,7 @@
  */
 
 @import "IKAspect.j"
+@import "IKAspectDetailsController.j"
 
 @implementation IKAspectAccessor : CPObject
 {
@@ -106,6 +107,11 @@
         return @"objectValue";
 
     return [_parent valueKeyPath] + [self longValueKey];
+}
+
+- (IKAspectDetailsController)detailsController
+{
+    return [[IKAspectDetailsController alloc] initWithCibName:@"AspectGeneralDetailView" bundle:[InspectKit bundle]];
 }
 
 @end

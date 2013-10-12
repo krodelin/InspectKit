@@ -105,19 +105,19 @@
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBOutletConnection" key="connection">
-						<string key="label">propertiesView</string>
-						<reference key="source" ref="1001"/>
-						<reference key="destination" ref="611712330"/>
-					</object>
-					<int key="connectionID">132</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBOutletConnection" key="connection">
 						<string key="label">detailsView</string>
 						<reference key="source" ref="1001"/>
 						<reference key="destination" ref="815452995"/>
 					</object>
 					<int key="connectionID">137</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBOutletConnection" key="connection">
+						<string key="label">hierarchyView</string>
+						<reference key="source" ref="1001"/>
+						<reference key="destination" ref="611712330"/>
+					</object>
+					<int key="connectionID">138</int>
 				</object>
 			</array>
 			<object class="IBMutableOrderedSet" key="objectRecords">
@@ -201,7 +201,7 @@
 			<nil key="activeLocalization"/>
 			<dictionary class="NSMutableDictionary" key="localizations"/>
 			<nil key="sourceID"/>
-			<int key="maxID">137</int>
+			<int key="maxID">138</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<array class="NSMutableArray" key="referencedPartialClassDescriptions">
@@ -210,15 +210,15 @@
 					<string key="superclassName">NSWindowController</string>
 					<dictionary class="NSMutableDictionary" key="outlets">
 						<string key="detailsView">NSView</string>
-						<string key="propertiesView">NSView</string>
+						<string key="hierarchyView">NSView</string>
 					</dictionary>
 					<dictionary class="NSMutableDictionary" key="toOneOutletInfosByName">
 						<object class="IBToOneOutletInfo" key="detailsView">
 							<string key="name">detailsView</string>
 							<string key="candidateClassName">NSView</string>
 						</object>
-						<object class="IBToOneOutletInfo" key="propertiesView">
-							<string key="name">propertiesView</string>
+						<object class="IBToOneOutletInfo" key="hierarchyView">
+							<string key="name">hierarchyView</string>
 							<string key="candidateClassName">NSView</string>
 						</object>
 					</dictionary>

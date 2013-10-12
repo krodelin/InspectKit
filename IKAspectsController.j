@@ -29,82 +29,12 @@
  */
 
 @import <AppKit/AppKit.j>
-@import "InspectKitClass.j"
 @import "IKAspectAccessor.j"
 
 @implementation IKAspectsController : CPViewController // <CPOutlineViewDataSource>
 {
-    IKAspectAccessor _accessor;
-    @outlet CPOutlineView _outlineView;
-    @outlet CPTextfFeldView _valueKeyPathView;
+    IKAspectAccessor _accessor @accessors(property=accessor);
 }
 
-- (void)setAccessor:(IKAspectAccessor)accessor
-{
-    // CPLog.trace(@"%@ - (void)setAccessor:(IKAspectAccessor)%@", self, accessor);
-
-    _accessor = accessor;
-}
-
-- (IKAspectAccessor)accessor
-{
-    return _accessor;
-}
-
-- (id)outlineView:(CPOutlineView)outlineView child:(CPInteger)index ofItem:(id)item
-{
-    // CPLog.trace(@"%@ - (id)outlineView:(CPOutlineView)%@ child:(CPInteger)%@ ofItem:(id)%@", self, outlineView, index, item);
-
-    if(!item)
-        return _accessor;
-
-    return [[item subAccessors] objectAtIndex:index];
-}
-
-- (BOOL)outlineView:(CPOutlineView)outlineView isItemExpandable:(id)item
-{
-    // CPLog.trace(@"%@ - (BOOL)outlineView:(CPOutlineView)%@ isItemExpandable:(id)%@", self, outlineView, item);
-
-    return [self outlineView:outlineView numberOfChildrenOfItem:item] > 0;
-}
-- (int)outlineView:(CPOutlineView)outlineView numberOfChildrenOfItem:(id)item
-{
-    // CPLog.trace(@"%@ - (int)outlineView:(CPOutlineView)%@ numberOfChildrenOfItem:(id)%@", self, outlineView, item);
-
-    if(!_accessor)
-        return 0;
-
-    if(!item)
-        return 1;
-
-    return [[item subAccessors] count];
-}
-
-- (id)_outlineView:(CPOutlineView)outlineView objectValueForTableColumn:(CPTableColumn)tableColumn byItem:(id)item
-{
-    // CPLog.trace(@"%@ - (id)outlineView:(CPOutlineView)%@ objectValueForTableColumn:(CPTableColumn)%@ byItem:(id)%@", self, outlineView, tableColumn, item);
-
-    var value = [item valueDisplayString],
-        key = [item valueKey];
-    return [CPString stringWithFormat:"%@: %@", key, value];
-}
-
-- (id)outlineView:(id)outlineView viewForTableColumn:(id)tableColumn item:(id)item
-{
-    var tableCellView = [outlineView makeViewWithIdentifier:@"propertyCell" owner:self],
-        value = [item valueDisplayString],
-        key = [item shortValueKey],
-        text = [CPString stringWithFormat:"%@: %@", key, value];
-    [[tableCellView textField] setStringValue:text];
-    [[tableCellView imageView] setImage:[item valueImage]];
-    return tableCellView;
-}
-
-- (void)outlineViewSelectionDidChange:(CPNotification)notification
-{
-    var selectedItem = [_outlineView itemAtRow:[_outlineView selectedRow]],
-        keyPath = [selectedItem valueKeyPath];
-    [_valueKeyPathView setStringValue:keyPath];
-}
 
 @end
