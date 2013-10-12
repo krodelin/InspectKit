@@ -31,16 +31,17 @@
 @import <AppKit/AppKit.j>
 @import "InspectKitClass.j"
 @import "IKAspectAccessor.j"
-@import "IKAspectsController.j"
+@import "IKAspectHierarchyController.j"
 
 @implementation IKWindowController : CPWindowController
 {
     IKAspectAccessor _accessor @accessors(property=accessor, readonly);
 
-    @outlet CPView propertiesView;
-    IKAspectsController propertiesController;
+    @outlet CPView hierarchyView;
+    IKAspectHierarchyController hierarchyController;
 
     @outlet CPView detailsView;
+    IKAspectsController detailsController;
 }
 
 - (id)initWithSubject:(id)subject
@@ -49,17 +50,31 @@
     if (self = [super initWithWindowCibPath:path owner:self])
     {
         _accessor = [[IKAspectAccessor alloc] initWithSubject:subject];
-        [propertiesController setAccessor: _accessor];
+        [hierarchyController setAccessor: _accessor];
     }
     return self;
 }
 
 - (void)awakeFromCib
 {
-    propertiesController = [[IKAspectsController alloc] initWithCibName:@"AspectsView" bundle:[InspectKit bundle]];
-    [propertiesController setAccessor: _accessor];
-    [[propertiesController view] setFrame:[propertiesView bounds]];
-    [propertiesView addSubview:[propertiesController view]];
+    hierarchyController = [[IKAspectHierarchyController alloc] initWithCibName:@"AspectHierarchyView" bundle:[InspectKit bundle]];
+    [hierarchyController setAccessor: _accessor];
+    [hierarchyController setWindowController: self];
+    [[hierarchyController view] setFrame:[hierarchyView bounds]];
+    [hierarchyView addSubview:[hierarchyController view]];
+}
+
+- (void)setSelection:(IKAspectAccessor)accessor
+{
+    if (detailsController)
+    {
+        [[detailsController view] removeFromSuperview];
+    }
+
+    detailsController = [accessor detailsController];
+    [detailsController setAccessor: accessor];
+    [[detailsController view] setFrame:[detailsView bounds]];
+    [detailsView addSubview:[detailsController view]];
 }
 
 @end

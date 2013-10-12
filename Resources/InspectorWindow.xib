@@ -2,9 +2,9 @@
 <archive type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="8.00">
 	<data>
 		<int key="IBDocument.SystemTarget">1080</int>
-		<string key="IBDocument.SystemVersion">12D78</string>
+		<string key="IBDocument.SystemVersion">12E55</string>
 		<string key="IBDocument.InterfaceBuilderVersion">3084</string>
-		<string key="IBDocument.AppKitVersion">1187.37</string>
+		<string key="IBDocument.AppKitVersion">1187.39</string>
 		<string key="IBDocument.HIToolboxVersion">626.00</string>
 		<object class="NSMutableDictionary" key="IBDocument.PluginVersions">
 			<string key="NS.key.0">com.apple.InterfaceBuilder.CocoaPlugin</string>
@@ -13,6 +13,7 @@
 		<array key="IBDocument.IntegratedClassDependencies">
 			<string>NSCustomObject</string>
 			<string>NSCustomView</string>
+			<string>NSSplitView</string>
 			<string>NSView</string>
 			<string>NSWindowTemplate</string>
 		</array>
@@ -36,7 +37,7 @@
 			<object class="NSWindowTemplate" id="1039489826">
 				<int key="NSWindowStyleMask">31</int>
 				<int key="NSWindowBacking">2</int>
-				<string key="NSWindowRect">{{196, 132}, {276, 378}}</string>
+				<string key="NSWindowRect">{{196, 132}, {424, 337}}</string>
 				<int key="NSWTFlags">-1535638528</int>
 				<string key="NSWindowTitle">Window</string>
 				<string key="NSWindowClass">NSPanel</string>
@@ -46,22 +47,48 @@
 					<reference key="NSNextResponder"/>
 					<int key="NSvFlags">256</int>
 					<array class="NSMutableArray" key="NSSubviews">
-						<object class="NSCustomView" id="611712330">
+						<object class="NSSplitView" id="558349228">
 							<reference key="NSNextResponder" ref="181777512"/>
 							<int key="NSvFlags">274</int>
-							<string key="NSFrameSize">{276, 378}</string>
+							<array class="NSMutableArray" key="NSSubviews">
+								<object class="NSCustomView" id="611712330">
+									<reference key="NSNextResponder" ref="558349228"/>
+									<int key="NSvFlags">274</int>
+									<array class="NSMutableArray" key="NSSubviews"/>
+									<string key="NSFrameSize">{208, 337}</string>
+									<reference key="NSSuperview" ref="558349228"/>
+									<reference key="NSWindow"/>
+									<reference key="NSNextKeyView" ref="815452995"/>
+									<string key="NSReuseIdentifierKey">_NS:9</string>
+									<string key="NSClassName">NSView</string>
+								</object>
+								<object class="NSCustomView" id="815452995">
+									<reference key="NSNextResponder" ref="558349228"/>
+									<int key="NSvFlags">268</int>
+									<array class="NSMutableArray" key="NSSubviews"/>
+									<string key="NSFrame">{{218, 0}, {206, 337}}</string>
+									<reference key="NSSuperview" ref="558349228"/>
+									<reference key="NSWindow"/>
+									<reference key="NSNextKeyView"/>
+									<string key="NSReuseIdentifierKey">_NS:9</string>
+									<string key="NSClassName">NSView</string>
+								</object>
+							</array>
+							<string key="NSFrameSize">{424, 337}</string>
 							<reference key="NSSuperview" ref="181777512"/>
 							<reference key="NSWindow"/>
-							<string key="NSReuseIdentifierKey">_NS:9</string>
-							<string key="NSClassName">NSView</string>
+							<reference key="NSNextKeyView" ref="611712330"/>
+							<bool key="NSIsVertical">YES</bool>
+							<int key="NSDividerStyle">3</int>
 						</object>
 					</array>
-					<string key="NSFrameSize">{276, 378}</string>
+					<string key="NSFrameSize">{424, 337}</string>
 					<reference key="NSSuperview"/>
 					<reference key="NSWindow"/>
+					<reference key="NSNextKeyView" ref="558349228"/>
 					<string key="NSReuseIdentifierKey">_NS:21</string>
 				</object>
-				<string key="NSScreenRect">{{0, 0}, {1920, 1178}}</string>
+				<string key="NSScreenRect">{{0, 0}, {1680, 1028}}</string>
 				<string key="NSMaxSize">{10000000000000, 10000000000000}</string>
 				<bool key="NSWindowIsRestorable">YES</bool>
 			</object>
@@ -78,11 +105,19 @@
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBOutletConnection" key="connection">
-						<string key="label">propertiesView</string>
+						<string key="label">detailsView</string>
+						<reference key="source" ref="1001"/>
+						<reference key="destination" ref="815452995"/>
+					</object>
+					<int key="connectionID">137</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBOutletConnection" key="connection">
+						<string key="label">hierarchyView</string>
 						<reference key="source" ref="1001"/>
 						<reference key="destination" ref="611712330"/>
 					</object>
-					<int key="connectionID">132</int>
+					<int key="connectionID">138</int>
 				</object>
 			</array>
 			<object class="IBMutableOrderedSet" key="objectRecords">
@@ -123,14 +158,29 @@
 						<int key="objectID">128</int>
 						<reference key="object" ref="181777512"/>
 						<array class="NSMutableArray" key="children">
-							<reference ref="611712330"/>
+							<reference ref="558349228"/>
 						</array>
 						<reference key="parent" ref="1039489826"/>
 					</object>
 					<object class="IBObjectRecord">
+						<int key="objectID">136</int>
+						<reference key="object" ref="558349228"/>
+						<array class="NSMutableArray" key="children">
+							<reference ref="815452995"/>
+							<reference ref="611712330"/>
+						</array>
+						<reference key="parent" ref="181777512"/>
+					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">135</int>
+						<reference key="object" ref="815452995"/>
+						<array class="NSMutableArray" key="children"/>
+						<reference key="parent" ref="558349228"/>
+					</object>
+					<object class="IBObjectRecord">
 						<int key="objectID">131</int>
 						<reference key="object" ref="611712330"/>
-						<reference key="parent" ref="181777512"/>
+						<reference key="parent" ref="558349228"/>
 					</object>
 				</array>
 			</object>
@@ -142,12 +192,16 @@
 				<boolean value="YES" key="127.NSWindowTemplate.visibleAtLaunch"/>
 				<string key="128.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="131.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
+				<string key="131.userInterfaceItemIdentifier">hierarchy</string>
+				<string key="135.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
+				<string key="135.userInterfaceItemIdentifier">details</string>
+				<string key="136.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 			</dictionary>
 			<dictionary class="NSMutableDictionary" key="unlocalizedProperties"/>
 			<nil key="activeLocalization"/>
 			<dictionary class="NSMutableDictionary" key="localizations"/>
 			<nil key="sourceID"/>
-			<int key="maxID">134</int>
+			<int key="maxID">138</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<array class="NSMutableArray" key="referencedPartialClassDescriptions">
@@ -156,15 +210,15 @@
 					<string key="superclassName">NSWindowController</string>
 					<dictionary class="NSMutableDictionary" key="outlets">
 						<string key="detailsView">NSView</string>
-						<string key="propertiesView">NSView</string>
+						<string key="hierarchyView">NSView</string>
 					</dictionary>
 					<dictionary class="NSMutableDictionary" key="toOneOutletInfosByName">
 						<object class="IBToOneOutletInfo" key="detailsView">
 							<string key="name">detailsView</string>
 							<string key="candidateClassName">NSView</string>
 						</object>
-						<object class="IBToOneOutletInfo" key="propertiesView">
-							<string key="name">propertiesView</string>
+						<object class="IBToOneOutletInfo" key="hierarchyView">
+							<string key="name">hierarchyView</string>
 							<string key="candidateClassName">NSView</string>
 						</object>
 					</dictionary>
